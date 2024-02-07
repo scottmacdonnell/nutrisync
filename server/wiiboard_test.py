@@ -234,7 +234,7 @@ class Wiiboard:
             return
         data[0] = "52"
 
-        senddata = bytes.fromhex(data)
+        senddata = bytes.fromhex(''.join(map(str, data)))
         self.controlsocket.send(senddata)
 
     # Turns the power button LED on if light is True, off if False
