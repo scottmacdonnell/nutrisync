@@ -137,7 +137,9 @@ class Wiiboard:
                         self.calibrationRequested = False
             elif intype == EXTENSION_8BYTES:
                 print("Received extension data.")
-                self.processor.mass(self.createBoardEvent(data[2:12]))
+                event = self.createBoardEvent(data[2:12])
+                print(f"Weight: {event.totalWeight} lbs")
+                self.processor.mass(event)
             else:
                 print("ACK to data write received")
 
