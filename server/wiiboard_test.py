@@ -200,10 +200,6 @@ class Wiiboard:
         bottomLeft = self.calcMass(rawBL, BOTTOM_LEFT)
         bottomRight = self.calcMass(rawBR, BOTTOM_RIGHT)
         boardEvent = BoardEvent(topLeft, topRight, bottomLeft, bottomRight, buttonPressed, buttonReleased)
-
-        # Print weight information
-        print(f"Total Weight: {boardEvent.totalWeight} lbs")
-
         return boardEvent
 
     def calcMass(self, raw, pos):
