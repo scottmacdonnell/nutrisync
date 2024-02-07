@@ -183,10 +183,10 @@ class Wiiboard:
                 self.buttonDown = False
                 print("Button released")
 
-        rawTR = (int(bytes[0]) << 8) + int(bytes[1])
-        rawBR = (int(bytes[2]) << 8) + int(bytes[3])
-        rawTL = (int(bytes[4]) << 8) + int(bytes[5])
-        rawBL = (int(bytes[6]) << 8) + int(bytes[7])
+        rawTR = int.from_bytes(bytes[0:2], byteorder='big')
+        rawBR = int.from_bytes(bytes[2:4], byteorder='big')
+        rawTL = int.from_bytes(bytes[4:6], byteorder='big')
+        rawBL = int.from_bytes(bytes[6:8], byteorder='big')
 
         topLeft = self.calcMass(rawTL, TOP_LEFT)
         topRight = self.calcMass(rawTR, TOP_RIGHT)
