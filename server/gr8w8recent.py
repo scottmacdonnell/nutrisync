@@ -18,7 +18,7 @@ import multiprocessing
 import asyncio
 import aiofiles
 
-OUTPUTFILE = '/home/giulio/Desktop/output'+str(time.time()).replace('.','')+'.csv'
+OUTPUTFILE = '/home/nutrisync/nutrisync/server/dump'+str(time.time()).replace('.','')+'.csv'
 
 # Wiiboard Parameters
 CONTINUOUS_REPORTING    = b'\x04'
