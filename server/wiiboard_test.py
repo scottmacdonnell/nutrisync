@@ -291,7 +291,7 @@ def main():
     board.setLight(False)
     board.wait(500)
     board.setLight(True)
-    board.receive()
+    # board.receive()
 
 
 if __name__ == "__main__":
