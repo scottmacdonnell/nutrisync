@@ -5,7 +5,7 @@ import sys
 import subprocess
 
 class Wiiboard:
-  def __init__(self, processor):
+  def __init__(self):
     self.address = None
 
     try:
