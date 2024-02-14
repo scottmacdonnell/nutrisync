@@ -7,7 +7,7 @@ import subprocess
 class Wiiboard:
   def __init__(self):
     self.address = None
-    self.processor = processor
+    # self.processor = processor
     self.calibration = []
     self.calibrationRequested = False
     self.LED = False
