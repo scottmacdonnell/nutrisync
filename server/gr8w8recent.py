@@ -243,7 +243,7 @@ def stop():
     proc.terminate()
     
 if __name__ == '__main__':
-    address = '00:1F:C5:A9:6B:E4'
+    address = '34:AF:2C:2C:1F:DE'
     wbb = WiiboardPrint(address)
     # wbb.loop()
     with open(OUTPUTFILE, 'w') as f:
