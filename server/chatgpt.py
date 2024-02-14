@@ -59,7 +59,7 @@ class WiiBalanceBoard:
             print(f"Error reading data: {e}")
 
         return None
-
+         
 if __name__ == "__main__":
     # Discover Wii Balance Board
     print("Discovering Wii Balance Board...")
