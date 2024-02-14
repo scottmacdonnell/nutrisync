@@ -14,7 +14,7 @@ class Wiiboard:
     self.address = None
     self.buttonDown = False
     self.status = "Disconnected"
-    self.lastEvent = BoardEvent(0, 0, 0, 0, False, False)
+    # self.lastEvent = BoardEvent(0, 0, 0, 0, False, False)
 
     # Sockets and status
     self.receivesocket = None
