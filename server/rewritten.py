@@ -1,4 +1,8 @@
+import collections
+import time
 import bluetooth
+import sys
+import subprocess
 
 def main():
   address = input("Enter the Wiiboard address (or press Enter to discover): ")
@@ -15,12 +19,12 @@ def main():
       if bluetooth_device[1] == "Nintendo RVL-WBC-01":
         address = bluetooth_device[0]
         print("Found Wiiboard at address " + address)
-      else:
+      if address is None:
         print("No Wiiboards discovered")
 
     ## DISCOVER FUNCTION - End
 
-    
+
 
 
 if __name__ == "__main__":
