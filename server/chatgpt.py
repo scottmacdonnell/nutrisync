@@ -46,7 +46,7 @@ class WiiBalanceBoard:
             input_type = data[2]
 
             if input_type == INPUT_READ_DATA:
-                raw_data = struct.unpack('>h'*8, data[6:22])
+                raw_data = struct.unpack('>h'*8, data[4:20])  # Adjust the index to start from 4
                 return {
                     'top_right': raw_data[0],
                     'bottom_right': raw_data[1],
