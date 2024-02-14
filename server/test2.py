@@ -3,6 +3,7 @@ import time
 import bluetooth
 import sys
 import subprocess
+import binascii
 
 CONTINUOUS_REPORTING = "04"  # Easier as string with leading zero
 
@@ -115,7 +116,7 @@ class Wiiboard:
     def receive(self):
         while self.status == "Connected" and not self.processor.done:
             data = self.receivesocket.recv(25)
-            intype = int(data.encode("hex")[2:4])
+            intype = int(binascii.hexlify(data)[4:6])
             if intype == INPUT_STATUS:
                 # TODO: Status input received. It just tells us battery life really
                 self.setReportingType()
@@ -237,7 +238,7 @@ class Wiiboard:
         senddata = ""
         for byte in data:
             byte = str(byte)
-            senddata += byte.encode("hex")
+            senddata += binascii.hexlify(byte)
 
         self.controlsocket.send(senddata)
 
