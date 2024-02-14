@@ -121,8 +121,8 @@ class Wiiboard:
         while self.status == "Connected" and not self.processor.done:
             data = self.receivesocket.recv(25)
             intype = int(data.hex()[2:4], 16)
-            print(f"Received data: {data}")
-            print(f"Input Type: {intype}")
+            # print(f"Received data: {data}")
+            # print(f"Input Type: {intype}")
 
             if intype == INPUT_STATUS:
                 print("Status input received. Battery life information.")
@@ -140,8 +140,8 @@ class Wiiboard:
                 event = self.createBoardEvent(data[2:12])
                 print(f"Weight: {event.totalWeight} lbs")
                 self.processor.mass(event)
-            else:
-                print("ACK to data write received")
+            # else:
+                # print("ACK to data write received")
 
     def disconnect(self):
         if self.status == "Connected":
