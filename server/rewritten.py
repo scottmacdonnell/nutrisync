@@ -7,6 +7,21 @@ import subprocess
 class Wiiboard:
   def __init__(self):
     self.address = None
+    self.processor = processor
+    self.calibration = []
+    self.calibrationRequested = False
+    self.LED = False
+    self.address = None
+    self.buttonDown = False
+    self.status = "Disconnected"
+    self.lastEvent = BoardEvent(0, 0, 0, 0, False, False)
+
+    # Sockets and status
+    self.receivesocket = None
+    self.controlsocket = None
+
+    for i in range(3):
+      self.calibration.append([10000] * 4)  # high dummy value so events with it don't register
 
     try:
       self.receivesocket = bluetooth.BluetoothSocket(bluetooth.L2CAP)
@@ -33,7 +48,26 @@ class Wiiboard:
     return address
   
 
-    
+    def connect(self, address):
+      if address is None:
+        print("Non existent address")
+        return
+      
+      self.receivesocket.connect((address, 0x13))
+      self.controlsocket.connect((address, 0x11))
+
+      if self.receivesocket and self.controlsocket:
+        print("Connected to Wiiboard at address " + address)
+        self.status = "Connected"
+        self.address = address
+        self.calibrate()
+        useExt = ["00", COMMAND_REGISTER, "04", "A4", "00", "40", "00"]
+        self.send(useExt)
+        self.setReportingType()
+        print("Wiiboard connected")
+      else:
+        print("Could not connect to Wiiboard at address " + address)
+
 
 def main():
   board = Wiiboard()
@@ -44,25 +78,16 @@ def main():
     print("Discovering board...")
     address = board.discover()
     
-    try:
-      # Disconnect already-connected devices.
-      # This is basically Linux black magic just to get the thing to work.
-      subprocess.check_output(["bluez-test-input", "disconnect", address], stderr=subprocess.STDOUT)
-      subprocess.check_output(["bluez-test-input", "disconnect", address], stderr=subprocess.STDOUT)
-    except:
-      pass
-
-    print("Trying to connect...")
-
-    ## CONNECT FUNCTION - Start
-
-    # if address is None:
-    #   print("Non existent address")
-    #   return
-
-
+  try:
+    # Disconnect already-connected devices.
+    # This is basically Linux black magic just to get the thing to work.
+    subprocess.check_output(["bluez-test-input", "disconnect", address], stderr=subprocess.STDOUT)
+    subprocess.check_output(["bluez-test-input", "disconnect", address], stderr=subprocess.STDOUT)
+  except:
+    pass
   
-
+  print("Trying to connect...")
+  board.connect(address) # Wiiboard must be in sync mode
 
 
 if __name__ == "__main__":
