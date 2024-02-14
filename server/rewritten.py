@@ -48,25 +48,25 @@ class Wiiboard:
     return address
   
 
-    def connect(self, address):
-      if address is None:
-        print("Non existent address")
-        return
-      
-      self.receivesocket.connect((address, 0x13))
-      self.controlsocket.connect((address, 0x11))
+  def connect(self, address):
+    if address is None:
+      print("Non existent address")
+      return
+    
+    self.receivesocket.connect((address, 0x13))
+    self.controlsocket.connect((address, 0x11))
 
-      if self.receivesocket and self.controlsocket:
-        print("Connected to Wiiboard at address " + address)
-        self.status = "Connected"
-        self.address = address
-        self.calibrate()
-        useExt = ["00", COMMAND_REGISTER, "04", "A4", "00", "40", "00"]
-        self.send(useExt)
-        self.setReportingType()
-        print("Wiiboard connected")
-      else:
-        print("Could not connect to Wiiboard at address " + address)
+    if self.receivesocket and self.controlsocket:
+      print("Connected to Wiiboard at address " + address)
+      self.status = "Connected"
+      self.address = address
+      self.calibrate()
+      useExt = ["00", COMMAND_REGISTER, "04", "A4", "00", "40", "00"]
+      self.send(useExt)
+      self.setReportingType()
+      print("Wiiboard connected")
+    else:
+      print("Could not connect to Wiiboard at address " + address)
 
 
 def main():
