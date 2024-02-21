@@ -46,6 +46,7 @@ class HX711:
         self.DOUT = dout
 
         # Setup the GPIO Pin as output
+        GPIO.setwarnings(False)
         GPIO.setup(self.PD_SCK, GPIO.OUT)
 
         # Setup the GPIO Pin as input
