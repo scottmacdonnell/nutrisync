@@ -17,7 +17,7 @@ hx.zero()
 
 while True:
     try:
-        val = hx.get_weight(5)
+        val = hx.get_data_mean(readings=100)
         print(f"Weight: {val} grams")
         hx.power_down()
         hx.power_up()
