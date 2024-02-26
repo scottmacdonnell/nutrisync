@@ -1,8 +1,14 @@
 import RPi.GPIO as GPIO
 import time
 
+# Define GPIO pins
 DOUT = 5
 PD_SCK = 6
+
+# Set up GPIO pins
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(PD_SCK, GPIO.OUT)
+GPIO.setup(DOUT, GPIO.IN)
 
 def read_HX711():
     count = 0
@@ -27,7 +33,6 @@ def read_HX711():
     
     return count
 
-
 def get_weight():
     # Read the data
     value = read_HX711()
@@ -39,22 +44,11 @@ def get_weight():
     weight = (value - offset) / reference_unit
     return weight
 
-
-def main():
-    # Set up GPIO pins
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(PD_SCK, GPIO.OUT)
-    GPIO.setup(DOUT, GPIO.IN)
-    
-    try:
-        while True:
-            total_weight = get_weight()
-            print(f"Total Weight: {total_weight} grams")
-            time.sleep(5)
-    except (KeyboardInterrupt, SystemExit):
-        print("Cleaning up...")
-        GPIO.cleanup()
-
-
-if __name__ == "__main__":
-    main()
+try:
+    while True:
+        total_weight = get_weight()
+        print(f"Total Weight: {total_weight} grams")
+        time.sleep(5)
+except (KeyboardInterrupt, SystemExit):
+    print("Cleaning up...")
+    GPIO.cleanup()
