@@ -13,13 +13,7 @@ GPIO.setmode(GPIO.BCM)
 
 hx = HX711(dout_pin=5, pd_sck_pin=6)
 
-# Your calibration factor here. This needs to be determined experimentally.
-hx.set_reference_unit(1)
-
-hx.reset()
-hx.tare()
-
-print("Tare done! Add weight now...")
+hx.zero()
 
 while True:
     try:
