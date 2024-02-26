@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 from hx711 import HX711
 
-GPIO.setmode(BCM)
+GPIO.setmode(GPIO.BCM)
 
 hx= HX711(dout_pin=5, pd_sck_pin=6)
 
