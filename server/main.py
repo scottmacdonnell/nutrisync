@@ -28,33 +28,33 @@ def read_HX711():
     return count
 
 
-def get_weight():
-    # Read the data
-    value = read_HX711()
-    
-    # TODO: Calibrate the following values as per your load cell and HX711
-    reference_unit = 1  # Set to the value obtained during calibration
-    offset = 8435475  # Set to the value obtained during calibration
-    
-    weight = (value - offset) / reference_unit
-    return weight
-
-
 # def get_weight():
+#     # Read the data
 #     value = read_HX711()
     
-#     # Put the known weight on the scale and run this script. Replace `known_weight` with your known weight value.
-#     known_weight = 204  # Change this to your known weight in grams
-    
-#     # If running for the first time, set offset to the value read with no weight
-#     # After the first run, uncomment the next line and update the offset value
-#     offset = 4352  # Replace 0 with the value from the first run with no weight
-
-#     # If running for the first time, comment out the following line until you've obtained the offset
-#     reference_unit = (value - offset) / known_weight
+#     # TODO: Calibrate the following values as per your load cell and HX711
+#     reference_unit = 1  # Set to the value obtained during calibration
+#     offset = 8435475  # Set to the value obtained during calibration
     
 #     weight = (value - offset) / reference_unit
-#     return weight, reference_unit  # Also returning reference unit for calibration
+#     return weight
+
+
+def get_weight():
+    value = read_HX711()
+    
+    # Put the known weight on the scale and run this script. Replace `known_weight` with your known weight value.
+    known_weight = 204  # Change this to your known weight in grams
+    
+    # If running for the first time, set offset to the value read with no weight
+    # After the first run, uncomment the next line and update the offset value
+    offset = 0  # Replace 0 with the value from the first run with no weight
+
+    # If running for the first time, comment out the following line until you've obtained the offset
+    reference_unit = (value - offset) / known_weight
+    
+    weight = (value - offset) / reference_unit
+    return weight, reference_unit  # Also returning reference unit for calibration
 
 
 
