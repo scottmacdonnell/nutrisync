@@ -44,17 +44,18 @@ def get_weight():
     value = read_HX711()
     
     # Put the known weight on the scale and run this script. Replace `known_weight` with your known weight value.
-    known_weight = 204  # Change this to your known weight in grams
+    # known_weight = 204  # Change this to your known weight in grams
     
     # If running for the first time, set offset to the value read with no weight
     # After the first run, uncomment the next line and update the offset value
-    offset = 0  # Replace 0 with the value from the first run with no weight
+    # offset = 0  # Replace 0 with the value from the first run with no weight
 
     # If running for the first time, comment out the following line until you've obtained the offset
-    reference_unit = (value - offset) / known_weight
+    # reference_unit = (value - offset) / known_weight
     
-    weight = (value - offset) / reference_unit
-    return weight, reference_unit  # Also returning reference unit for calibration
+    # weight = (value - offset) / reference_unit
+    # return weight, reference_unit  # Also returning reference unit for calibration
+    return value
 
 
 
