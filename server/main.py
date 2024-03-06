@@ -33,8 +33,8 @@ def get_weight():
     value = read_HX711()
     
     # TODO: Calibrate the following values as per your load cell and HX711
-    reference_unit = 204  # Set to the value obtained during calibration
-    offset = 41352  # Set to the value obtained during calibration
+    reference_unit = 1  # Set to the value obtained during calibration
+    offset = 0  # Set to the value obtained during calibration
     
     weight = (value - offset) / reference_unit
     return weight
