@@ -48,7 +48,7 @@ def get_weight():
     
     # If running for the first time, set offset to the value read with no weight
     # After the first run, uncomment the next line and update the offset value
-    offset = 0  # Replace 0 with the value from the first run with no weight
+    offset = 41352.75  # Replace 0 with the value from the first run with no weight
 
     # If running for the first time, comment out the following line until you've obtained the offset
     reference_unit = (value - offset) / known_weight
