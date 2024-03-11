@@ -12,8 +12,15 @@ def status(format_code, message):
     
 
 def main():
+    DOUT = 5
+    PD_SCK = 6
+    
     GPIO.setmode(GPIO.BCM)
-    hx = HX711(dout_pin=5, pd_sck_pin=6)
+    print(status('\033[32m', 'OK') + 'Set GPIO mode to BCM')
+    
+    hx = HX711(dout_pin=DOUT, pd_sck_pin=6)
+    print(status('\033[32m', 'OK') + 'Set DOUT pin to ' + DOUT)
+    print(status('\033[32m', 'OK') + 'Set PD_SCK pin to ' + PD_SCK)
     
     hx.zero()
     
