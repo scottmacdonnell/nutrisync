@@ -15,6 +15,9 @@ def main():
     DOUT = 5
     PD_SCK = 6
     
+    GPIO.setwarnings(False)
+    print(status('\033[33m', 'WARN') + 'All GPIO warnings disabled')
+       
     GPIO.setmode(GPIO.BCM)
     print(status('\033[32m', 'OK') + 'Set GPIO mode to BCM')
     
