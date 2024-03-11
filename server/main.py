@@ -29,11 +29,11 @@ def main():
     hx.zero()
     print(status('\033[32m', 'OK') + 'Set offset value')
     
-    input(status('\033[35m', 'READ') + 'Place known weight on scale and press enter')
+    input(status('\033[35m', 'IN') + 'Place known weight on scale and press enter')
     print(status('\033[34m', 'SYNC') + 'Reading data')
     reading = hx.get_data_mean(readings=100)
     
-    known_weight = float(input(status('\033[35m', 'READ') + 'Enter the known weight in grams and press enter: '))
+    known_weight = float(input(status('\033[35m', 'IN') + 'Enter the known weight in grams and press enter: '))
     ratio = reading / known_weight
     hx.set_scale_ratio(ratio)
     
