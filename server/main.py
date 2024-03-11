@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+from hx711 import HX711
 
 DOUT = 5
 PD_SCK = 6
@@ -42,14 +43,17 @@ def get_weight():
 def main():
     # Set up GPIO pins
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(PD_SCK, GPIO.OUT)
-    GPIO.setup(DOUT, GPIO.IN)
+    # GPIO.setup(PD_SCK, GPIO.OUT)
+    # GPIO.setup(DOUT, GPIO.IN)
+    hx = HX711(dout_pin=DOUT, pd_sck_pin=PD_SCK)
     
     try:
         while True:
-            total_weight = get_weight()
-            print(f"Total Weight: {total_weight} grams")
-            time.sleep(5)
+            # total_weight = get_weight()
+            # print(f"Total Weight: {total_weight} grams")
+            # time.sleep(5)
+            reading = hx.get_raw_data_mean()
+            print(reading)
     except (KeyboardInterrupt, SystemExit):
         print("Cleaning up...")
         GPIO.cleanup()
