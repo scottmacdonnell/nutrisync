@@ -47,12 +47,14 @@ def main():
     # GPIO.setup(DOUT, GPIO.IN)
     hx = HX711(dout_pin=5, pd_sck_pin=6)
     
+    hx.zero()
+    
     try:
         while True:
             # total_weight = get_weight()
             # print(f"Total Weight: {total_weight} grams")
             # time.sleep(5)
-            reading = hx.get_raw_data_mean()
+            reading = hx.get_data_mean()
             print(reading)
     except (KeyboardInterrupt, SystemExit):
         print("Cleaning up...")
