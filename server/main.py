@@ -16,7 +16,7 @@ def main():
     PD_SCK = 6
     
     GPIO.setwarnings(False)
-    print(status('\033[33m', 'WARN') + 'All GPIO warnings disabled')
+    print(status('\033[32m', 'OK') + 'All GPIO warnings disabled')
        
     GPIO.setmode(GPIO.BCM)
     print(status('\033[32m', 'OK') + 'Set GPIO mode to BCM')
@@ -25,9 +25,11 @@ def main():
     print(status('\033[32m', 'OK') + 'Set DOUT pin to ' + str(DOUT))
     print(status('\033[32m', 'OK') + 'Set PD_SCK pin to ' + str(PD_SCK))
     
+    print(status('\033[34m', 'SYNC') + 'Reading offset value')
     hx.zero()
+    print(status('\033[32m', 'OK') + 'Offset value set and scale calibrated')
     
-    input(status('\033[32m', 'OK') + 'Place known weight on scale and press enter')
+    input(status('\033[35m', 'READ') + 'Place known weight on scale and press enter')
     reading = hx.get_data_mean(readings=100)
     
     known_weight = float(input('Enter the known weight in grams and press enter: '))
