@@ -46,7 +46,7 @@ def main():
             weight = hx.get_weight_mean()
             print(weight)
     except (KeyboardInterrupt, SystemExit):
-        print('\n' + status('\033[32m', 'OK') + 'Cleaning GPIO pins')
+        print('\n' + status('\033[32m', 'OK') + 'Ending processes')
         GPIO.cleanup()
 
 
