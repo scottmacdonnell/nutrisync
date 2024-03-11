@@ -49,13 +49,17 @@ def main():
     
     hx.zero()
     
+    input('Place known weight on scale and press enter')
+    reading = hx.get_data_mean(readings=100)
+    
+    known_weight = float(input('Enter the known weight in grams and press enter: '))
+    ratio = reading / known_weight
+    hx.set_scale_ratio(ratio)
+    
     try:
         while True:
-            # total_weight = get_weight()
-            # print(f"Total Weight: {total_weight} grams")
-            # time.sleep(5)
-            reading = hx.get_data_mean()
-            print(reading)
+            weight = hx.get_weight_mean()
+            print(weight)
     except (KeyboardInterrupt, SystemExit):
         print("Cleaning up...")
         GPIO.cleanup()
