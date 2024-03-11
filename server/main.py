@@ -19,8 +19,8 @@ def main():
     print(status('\033[32m', 'OK') + 'Set GPIO mode to BCM')
     
     hx = HX711(dout_pin=DOUT, pd_sck_pin=6)
-    print(status('\033[32m', 'OK') + 'Set DOUT pin to ' + DOUT)
-    print(status('\033[32m', 'OK') + 'Set PD_SCK pin to ' + PD_SCK)
+    print(status('\033[32m', 'OK') + 'Set DOUT pin to ' + str(DOUT))
+    print(status('\033[32m', 'OK') + 'Set PD_SCK pin to ' + str(PD_SCK))
     
     hx.zero()
     
