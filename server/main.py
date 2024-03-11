@@ -11,7 +11,7 @@ def main():
     
     hx.zero()
     
-    input(status('\x1b[0;32;40', '  OK  ') + 'Place known weight on scale and press enter')
+    input('[\033[32m  OK  \033[0m] ' + 'Place known weight on scale and press enter')
     reading = hx.get_data_mean(readings=100)
     
     known_weight = float(input('Enter the known weight in grams and press enter: '))
