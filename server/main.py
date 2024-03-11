@@ -45,7 +45,7 @@ def main():
     GPIO.setmode(GPIO.BCM)
     # GPIO.setup(PD_SCK, GPIO.OUT)
     # GPIO.setup(DOUT, GPIO.IN)
-    hx = HX711(dout_pin=DOUT, pd_sck_pin=PD_SCK)
+    hx = HX711(dout_pin=5, pd_sck_pin=6)
     
     try:
         while True:
