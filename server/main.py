@@ -15,38 +15,38 @@ def main():
     DOUT = 5
     PD_SCK = 6
     
-    GPIO.setwarnings(False)
-    print(status('\033[32m', 'OK') + 'All GPIO warnings disabled')
-       
-    GPIO.setmode(GPIO.BCM)
-    print(status('\033[32m', 'OK') + 'Set GPIO mode to BCM')
-    
-    hx = HX711(dout_pin=DOUT, pd_sck_pin=6)
-    print(status('\033[32m', 'OK') + 'Set DOUT pin to ' + str(DOUT))
-    print(status('\033[32m', 'OK') + 'Set PD_SCK pin to ' + str(PD_SCK))
-    
-    print(status('\033[34m', 'SYNC') + 'Reading offset value')
-    hx.zero()
-    print(status('\033[32m', 'OK') + 'Set offset value')
-    
-    input(status('\033[35m', 'IN') + 'Place known weight on scale and press enter')
-    print(status('\033[34m', 'SYNC') + 'Reading data')
-    reading = hx.get_data_mean(readings=100)
-    print(status('\033[32m', 'OK') + 'Set default readings')
-    
-    known_weight = float(input(status('\033[35m', 'IN') + 'Enter the known weight in grams and press enter: '))
-    print(status('\033[32m', 'OK') + 'Set known weight')
-    print(status('\033[34m', 'SYNC') + 'Calculating scale ratio')
-    ratio = reading / known_weight
-    hx.set_scale_ratio(ratio)
-    print(status('\033[32m', 'OK') + 'Set scale ratio')
-    
     try:
+        GPIO.setwarnings(False)
+        print(status('\033[32m', 'OK') + 'All GPIO warnings disabled')
+        
+        GPIO.setmode(GPIO.BCM)
+        print(status('\033[32m', 'OK') + 'Set GPIO mode to BCM')
+        
+        hx = HX711(dout_pin=DOUT, pd_sck_pin=6)
+        print(status('\033[32m', 'OK') + 'Set DOUT pin to ' + str(DOUT))
+        print(status('\033[32m', 'OK') + 'Set PD_SCK pin to ' + str(PD_SCK))
+        
+        print(status('\033[34m', 'SYNC') + 'Reading offset value')
+        hx.zero()
+        print(status('\033[32m', 'OK') + 'Set offset value')
+        
+        input(status('\033[35m', 'IN') + 'Place known weight on scale and press enter')
+        print(status('\033[34m', 'SYNC') + 'Reading data')
+        reading = hx.get_data_mean(readings=100)
+        print(status('\033[32m', 'OK') + 'Set default readings')
+        
+        known_weight = float(input(status('\033[35m', 'IN') + 'Enter the known weight in grams and press enter: '))
+        print(status('\033[32m', 'OK') + 'Set known weight')
+        print(status('\033[34m', 'SYNC') + 'Calculating scale ratio')
+        ratio = reading / known_weight
+        hx.set_scale_ratio(ratio)
+        print(status('\033[32m', 'OK') + 'Set scale ratio')
+        
         while True:
             weight = hx.get_weight_mean()
             print(weight)
     except (KeyboardInterrupt, SystemExit):
-        print("Cleaning up...")
+        print('\n' + status('\033[32m', 'OK') + 'Cleaning GPIO pins')
         GPIO.cleanup()
 
 
