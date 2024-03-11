@@ -32,10 +32,14 @@ def main():
     input(status('\033[35m', 'IN') + 'Place known weight on scale and press enter')
     print(status('\033[34m', 'SYNC') + 'Reading data')
     reading = hx.get_data_mean(readings=100)
+    print(status('\033[32m', 'OK') + 'Set default readings')
     
     known_weight = float(input(status('\033[35m', 'IN') + 'Enter the known weight in grams and press enter: '))
+    print(status('\033[32m', 'OK') + 'Set known weight')
+    print(status('\033[34m', 'SYNC') + 'Calculating scale ratio')
     ratio = reading / known_weight
     hx.set_scale_ratio(ratio)
+    print(status('\033[32m', 'OK') + 'Set scale ratio')
     
     try:
         while True:
