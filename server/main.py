@@ -21,8 +21,11 @@ def get_weight_average(hx, quantity):
         
     print(status('\033[32m', 'OK') + 'Set weight data')
     print(status('\033[34m', 'SYNC') + 'Calculating average weight')
-    return data / quantity
-        
+    return data /quantity
+
+def pound_conversion(grams):
+    pounds = grams * 0.00220462
+    return pounds
 
 def main():
     DOUT = 5
@@ -57,7 +60,15 @@ def main():
         
         input(status('\033[35m', 'IN') + 'Step on scale and press enter')
         weight = get_weight_average(hx, 10)
+        print(status('\033[32m', 'OK') + 'Set average weight')
+        
         print(status('\033[32m', 'OK') + f'Average weight: {str(weight)}g')
+        
+        print(status('\033[34m', 'SYNC') + 'Calculating weight in lbs')
+        weight_lbs = pound_conversion(weight)
+        print(status('\033[32m', 'OK') + 'Set weight in lbs')
+        print(status('\033[32m', 'OK') + f'Average weight: {str(weight_lbs)}lb')
+        
         
         
     except (KeyboardInterrupt, SystemExit):
