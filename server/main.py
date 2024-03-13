@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 from hx711 import HX711
 
+
 def status(format_code, message):
     escape_code = '\033[0m'
     message = message[:6]
@@ -9,7 +10,17 @@ def status(format_code, message):
     right_spaces = total_spaces - left_spaces
     s = ' ' * left_spaces + message + ' ' * right_spaces
     return '[' + format_code + s + escape_code + '] '
+
+
+def get_weight_average(hx, quantity):
+    data = 0.0
     
+    for i in range(quantity):
+        print(status('\033[34m', 'SYNC') + f'Reading weight {i}/{quantity}')
+        data += hx.get_weight_mean()
+    
+    return data / quantity
+        
 
 def main():
     DOUT = 5
@@ -42,9 +53,13 @@ def main():
         hx.set_scale_ratio(ratio)
         print(status('\033[32m', 'OK') + 'Set scale ratio')
         
-        while True:
-            weight = hx.get_weight_mean()
-            print(status('\033[32m', 'OK') + 'Weight: ' + str(weight) + 'g')
+        input(status('\033[35m', 'IN') + 'Step on scale and press enter')
+        weight = get_weight_average(hx, 10)
+        print(status('\033[32m', 'OK') + f'Weight: {str(weight)}g')
+        
+        # while True:
+        #     weight = hx.get_weight_mean()
+        #     print(status('\033[32m', 'OK') + 'Weight: ' + str(weight) + 'g')
     except (KeyboardInterrupt, SystemExit):
         print('\n' + status('\033[32m', 'OK') + 'Ending processes')
         GPIO.cleanup()
