@@ -16,9 +16,11 @@ def get_weight_average(hx, quantity):
     data = 0.0
     
     for i in range(quantity):
-        print(status('\033[34m', 'SYNC') + f'Reading weight {i}/{quantity}')
+        print(status('\033[34m', 'SYNC') + f'Reading weight {i + 1}/{quantity}')
         data += hx.get_weight_mean()
-    
+        
+    print(status('\033[32m', 'OK') + 'Set weight data')
+    print(status('\033[34m', 'SYNC') + 'Calculating average weight')
     return data / quantity
         
 
@@ -55,11 +57,9 @@ def main():
         
         input(status('\033[35m', 'IN') + 'Step on scale and press enter')
         weight = get_weight_average(hx, 10)
-        print(status('\033[32m', 'OK') + f'Weight: {str(weight)}g')
+        print(status('\033[32m', 'OK') + f'Average weight: {str(weight)}g')
         
-        # while True:
-        #     weight = hx.get_weight_mean()
-        #     print(status('\033[32m', 'OK') + 'Weight: ' + str(weight) + 'g')
+        
     except (KeyboardInterrupt, SystemExit):
         print('\n' + status('\033[32m', 'OK') + 'Ending processes')
         GPIO.cleanup()
