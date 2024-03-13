@@ -1,8 +1,20 @@
 import RPi.GPIO as GPIO
 from hx711 import HX711
+from ISStreamer.Streamer import Streamer
+import json
+import datetime
+import random
 
+
+# GPIO variables
 DOUT = 5
 PD_SCK = 6
+
+
+# InitialState variables
+IS_BUCKET_KEY = 'JU7LEGUYKGCX'
+IS_ACCESS_KEY = 'ist_OZVQ3ePTE04kTXweWIzTkjtfIeftBfg8'
+
 
 def status(format_code, message):
     escape_code = '\033[0m'
@@ -16,18 +28,34 @@ def status(format_code, message):
 
 def get_weight_average(hx, quantity):
     data = 0.0
-    
     for i in range(quantity):
         print(status('\033[34m', 'SYNC') + f'Reading weight {i + 1}/{quantity}')
         data += hx.get_weight_mean()
-        
     print(status('\033[32m', 'OK') + 'Set weight data')
     print(status('\033[34m', 'SYNC') + 'Calculating average weight')
     return data /quantity
 
+
 def pound_conversion(grams):
     pounds = grams * 0.00220462
     return pounds
+
+
+def send_weight_to_initialstate(bucket_key, access_key, weight):
+    streamer = Streamer(access_key=access_key, bucket_key=bucket_key)
+    print(status('\033[32m', 'OK') + 'Streamer object created')
+    
+    try:
+        print(status('\033[34m', 'SYNC') + 'Streaming to InitialState')
+        streamer.log("Weight", weight)
+        print(status('\033[32m', 'OK') + 'Weight data sent successfully to InitialState')
+    except Exception as e:
+        print(status('\033[31m', 'FAILED') + f'Error sending weight data to InitialState: {e}')
+    finally:
+        print(status('\033[34m', 'SYNC') + 'Closing streamer connection')
+        streamer.close()
+        print(status('\033[32m', 'OK') + 'Streamer object closed')
+        
 
 def main():
     try:
@@ -68,9 +96,12 @@ def main():
         print(status('\033[32m', 'OK') + 'Set weight in lbs')
         print(status('\033[32m', 'OK') + f'Average weight: {str(weight_lbs)}lb')
         
-        
-        
+        print(status('\033[32m', 'OK') + 'Start uploading weight to InitialState')
+        send_weight_to_initialstate(IS_BUCKET_KEY, IS_ACCESS_KEY, weight_lbs)
     except (KeyboardInterrupt, SystemExit):
+        print('\n' + status('\033[32m', 'OK') + 'Ending processes')
+        GPIO.cleanup()
+    finally:
         print('\n' + status('\033[32m', 'OK') + 'Ending processes')
         GPIO.cleanup()
 
