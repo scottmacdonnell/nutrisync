@@ -99,7 +99,7 @@ def main():
         print('\n' + status('\033[32m', 'OK') + 'Ending processes')
         GPIO.cleanup()
     finally:
-        print('\n' + status('\033[32m', 'OK') + 'Ending processes')
+        print(status('\033[32m', 'OK') + 'Ending processes')
         GPIO.cleanup()
 
 
