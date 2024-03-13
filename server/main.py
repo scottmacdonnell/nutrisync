@@ -1,9 +1,6 @@
 import RPi.GPIO as GPIO
 from hx711 import HX711
 from ISStreamer.Streamer import Streamer
-import json
-import datetime
-import random
 
 
 # GPIO variables
