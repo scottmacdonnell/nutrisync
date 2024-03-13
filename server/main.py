@@ -1,6 +1,8 @@
 import RPi.GPIO as GPIO
 from hx711 import HX711
 
+DOUT = 5
+PD_SCK = 6
 
 def status(format_code, message):
     escape_code = '\033[0m'
@@ -28,9 +30,6 @@ def pound_conversion(grams):
     return pounds
 
 def main():
-    DOUT = 5
-    PD_SCK = 6
-    
     try:
         GPIO.setwarnings(False)
         print(status('\033[32m', 'OK') + 'All GPIO warnings disabled')
