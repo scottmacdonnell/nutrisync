@@ -11,17 +11,17 @@ struct ContentView: View {
     var body: some View {
         TabView {
             TodayView()
-                    .tabItem {
-                        Label("Today", systemImage: "chart.bar.doc.horizontal")
-                    }
+                .tabItem {
+                    Label("Today", systemImage: "chart.bar.doc.horizontal")
+                }
             MealsView()
-                    .tabItem {
-                        Label("Meals", systemImage: "fork.knife.circle")
-                    }
+                .tabItem {
+                    Label("Meals", systemImage: "fork.knife.circle")
+                }
             SettingsView()
-                    .tabItem {
-                        Label("Settings", systemImage: "gear")
-                    }
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                }
         }
     }
 }
